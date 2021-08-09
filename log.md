@@ -18,4 +18,30 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 
 ### Day 3: August 5th, 2021
 
-**Today's Progress:**  One hour of studying Data Structures via GA module, one hour of Javascript practice, one hour of job searching. Completed day 3 of Kevin Powell course.
+**Today's Progress:**  Two hours of studying computer science and algorithms via GA module. Completed day 3 of Kevin Powell course.
+
+**Thoughts:** I finally understand the difference between pixels, ems, and rems. CSS is still very very hard. So far I'm following the reading on Big O notation but have had trouble applying concepts with analogies.
+
+### Day 4: August 6th, 2021
+
+**Today's Progress:** Completed day four of Kevin Powell's responsive layout course + one hour of data structures and algorithms.
+
+**Thoughts:** Starting to get the hang of Big O notation -- also getting better at using ems/rems for styling.
+
+### Day 5: August 7th, 2021
+
+**Today's Progress:** Completed day five of Kevin Powell's responsive layout course + one hour of data structures and algorithms.
+
+**Thoughts:** Starting to get the hang of Big O notation -- also getting better at using ems/rems for styling.
+
+### Day 6: August 8th, 2021
+
+**Today's Progress:** Job search day!
+
+**Thoughts:** It's gotta happen eventually!
+
+### Day 7: August 9th, 2021
+
+**Today's Progress:** Several hours of studying recursion and writing recursive functions.
+
+**Thoughts:** I understand all the concepts but need a lot more practice. One idea -- take iterative functions and re-write them to use recursion instead.
