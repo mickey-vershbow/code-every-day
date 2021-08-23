@@ -1,7 +1,7 @@
-// CodeWars Solutions
 
 // Find the largest number in an array. If array is empty, the function should return 0.
 
+// ! ITERATIVE
 const solution = (numbers) => {
     let largest = numbers[0];
        for (let i = 0; i < numbers.length; i++) {
@@ -10,7 +10,21 @@ const solution = (numbers) => {
             }
        }
 };
-//! Or, the one-liner:
+
+//! RECURSIVE
+function findMax(arr) {
+  // Returns the number if list length is 1
+  if (arr.length === 1) return arr[0];
+
+  // Returns the greater number between the first two numbers in the array
+  if (arr.length === 2) return arr[0] > arr[1] ? arr[0] : arr[1];
+
+  // If array length is 3+
+  const subMax = findMax(arr.slice(1));
+  return arr[0] > subMax ? arr[0] : subMax;
+}
+
+//! Or, the one-liner. Will cause stack overflow if input is larger than 1,000
 function findMax(numbers) {
   return Math.max.apply(0, numbers)
 }
@@ -38,3 +52,14 @@ countDown(3);
 let sum = function(array) {
     return (array.length === 0) ? 0 : array[0] + sum(array.slice(1));
 }
+
+// Write a recursive function to calculate fibonacci sequence
+function fibonacci(n) {
+  if (n < 2) {
+    return n;
+  } else {
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+}
+
+console.log(fibonacci(4));
