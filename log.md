@@ -55,8 +55,14 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 
 **Today's Progress:** A few hours working on responsive layouts using flexbox. Job searching / networking. Finally learned about CSS pseudo elements.
 
-### Days 10-17: August 12-17, 2021
+### Days 10-17: August 12-19, 2021
 
 **Progress** Deep dive into a full redesign on the capstone project I made in bootcamp: Ruby on Rails backend + React frontend with third-party API integration. Also lots of assessments on job search platforms.
 
 **Thoughts** I need to learn much, much more about CS fundamentals for job interview prep. I'm getting much, much better at responsive layout patterns. I've also been able to research and implement solutions for problems in React with relative ease and speed compared to when i was in bootcamp.
+
+### Days 18-22: August 20-24, 2021
+
+**Progress** Portfolio is DONE for now! No need to put a million projects up, the four that are up there now represent my best work. I think it would be more useful to try and contribute to open-source projects or something like that rather than go and try to make the calculator or the stock prices API i built for class homework look impressive. Otherwise I've just been focused on studying recursion, CS fundamentals, and making my way through Cracking The Code Interview.
+
+**Thoughts** I need to practice walking through and explaining my code. I think i'll start making recordings of myself doing this for practice, and so I can identify aspects of my code that I can't explain or don't understand very well.
