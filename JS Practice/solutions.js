@@ -1,6 +1,7 @@
-
-// Find the largest number in an array. If array is empty, the function should return 0.
-
+////////////////////////////////////////////////////////
+// Find the largest number in an array.
+// If array is empty, the function should return 0.
+///////////////////////////////////////////////////////
 // ! ITERATIVE
 const solution = (numbers) => {
     let largest = numbers[0];
@@ -29,13 +30,18 @@ function findMax(numbers) {
   return Math.max.apply(0, numbers)
 }
 
-// Return the number (count) of vowels in the given string. We will consider a, e, i, o, u as vowels for this Kata (but not y). The input string will only consist of lower case letters and/or spaces.
+//////////////////////////////////////////////////////////////////////////////////
+// Return the number (count) of vowels in the given string. We will consider a, e, i, o, u
+// as vowels for this Kata (but not y). The input string will only consist of lower case letters and/or spaces.
+//////////////////////////////////////////////////////////////////////////////////
 
 function getCount(str) {
   return (str.match(/[aeiou]/ig)||[]).length;
 }
 
+//////////////////////////////////////////////////////////////////////////
 // Write a recursive function that counts down from a given number.
+//////////////////////////////////////////////////////////////////////////
 function countDown(fromNumber) {
     console.log(fromNumber);
 
@@ -45,15 +51,18 @@ function countDown(fromNumber) {
         countDown(nextNumber);
     }
 }
-countDown(3);
+// countDown(3);
 
-
+/////////////////////////////////////////////////////////
 // Sum an array of numbers without using recursion
+/////////////////////////////////////////////////////////
 let sum = function(array) {
     return (array.length === 0) ? 0 : array[0] + sum(array.slice(1));
 }
 
+///////////////////////////////////////////////////////////////////
 // Write a recursive function to calculate fibonacci sequence
+//////////////////////////////////////////////////////////////////
 function fibonacci(n) {
   if (n < 2) {
     return n;
@@ -61,6 +70,27 @@ function fibonacci(n) {
     return fibonacci(n - 1) + fibonacci(n - 2);
   }
 }
+// console.log(fibonacci(4));
 
-console.log(fibonacci(4));
 
+//////////////////////////////////////////////////
+// reverse individual words in a string in place
+/////////////////////////////////////////////////
+function reverseFunction(str) {
+  return str.split("").reverse().join("").split(" ").reverse().join(" ");
+}
+// console.log(reverseFunction("This is an example!"));
+
+function reverseWords(str) {
+  let reversed;
+  let newArray = [];
+  reversed = str.split(" ");
+  console.log(reversed);
+  for (var i = 0; i < reversed.length; i++) {
+    newArray.push(reversed[i].split("").reverse().join(""));
+    console.log(newArray);
+  }
+  return newArray.join(" ");
+}
+
+// console.log(reverseWords("This is an example!"));

@@ -75,6 +75,6 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 
 ### Days 25/26: August 27-28, 2021
 
-**Progress** Solved TwoSum and RemoveDuplicates challenges on leetcode; started studying bubble and insertion sorting algorithms. Learned about computed properties in JS. Still need to learn about Map objects and Memoization patterns.
+**Progress** Solved TwoSum and RemoveDuplicates challenges on leetcode; ReverseStringInPlace on CodeWars; Started studying bubble and insertion sorting algorithms. Learned about computed properties in JS. Still need to learn about Map objects and Memoization patterns.
 
 **Thoughts** Need to spend more time solving challenges on my own, however I can, before studying optimal solutions. Practice writing nested loops and then you can optimize!
