@@ -1,0 +1,20 @@
+{
+  "name": "code-every-day",
+  "version": "1.0.0",
+  "description": "This is the [100-days-of-code challenge](https://www.100daysofcode.com/). See the `log.md` file for a detailed log of daily work, and the `solutions.js` file for code.",
+  "main": "leetcode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mickey-vershbow/code-every-day.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mickey-vershbow/code-every-day/issues"
+  },
+  "homepage": "https://github.com/mickey-vershbow/code-every-day#readme"
+}

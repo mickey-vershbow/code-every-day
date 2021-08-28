@@ -66,3 +66,15 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 **Progress** Portfolio is DONE for now! No need to put a million projects up, the four that are up there now represent my best work. I think it would be more useful to try and contribute to open-source projects or something like that rather than go and try to make the calculator or the stock prices API i built for class homework look impressive. Otherwise I've just been focused on studying recursion, CS fundamentals, and making my way through Cracking The Code Interview.
 
 **Thoughts** I need to practice walking through and explaining my code. I think i'll start making recordings of myself doing this for practice, and so I can identify aspects of my code that I can't explain or don't understand very well.
+
+### Days 23/24: August 25-26, 2021
+
+**Progress** Learned how to solve the TwoSum algorithm problem, while it would still be difficult for me to just write the code off the top of my head, I mostly understand the solution and why it doesn't work to just use nested loops.
+
+**Thoughts** I need to understand how Map and hashtables work in javascript
+
+### Days 25/26: August 27-28, 2021
+
+**Progress** Solved TwoSum and RemoveDuplicates challenges on leetcode; started studying bubble and insertion sorting algorithms. Learned about computed properties in JS. Still need to learn about Map objects and Memoization patterns.
+
+**Thoughts** Need to spend more time solving challenges on my own, however I can, before studying optimal solutions. Practice writing nested loops and then you can optimize!
