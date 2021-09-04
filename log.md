@@ -78,3 +78,10 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 **Progress** Solved TwoSum and RemoveDuplicates challenges on leetcode; ReverseStringInPlace on CodeWars; Started studying bubble and insertion sorting algorithms. Learned about computed properties in JS. Still need to learn about Map objects and Memoization patterns.
 
 **Thoughts** Need to spend more time solving challenges on my own, however I can, before studying optimal solutions. Practice writing nested loops and then you can optimize!
+
+
+### Days 27-33: August 29 - September 4, 2021
+
+**Progress** Learned about linked list, wrote a solution to determine if it has a cycle. Completed several algorithm challenges with Kyle. Conquered CSS Grid and used it to style the forms on AHP to wireframe spec. Networked on Out In Tech, connected with Rhys Ryan of Ekkobar and will begin learning Python next week.
+
+**Thoughts** I'm excited to see how quickly I can learn Python now that I have a better understanding of the basic patterns in all programming languages (variables, data types, getters and setters, functions, conditionals, loops)

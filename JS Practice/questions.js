@@ -26,8 +26,4 @@
 // Write a recursive function to calculate fibonacci sequence
 //////////////////////////////////////////////////////////////////
 
-const fibonacci = (num) => {
-    // if N is less than 2, return n
 
-    // else, return the result of n-1 + n-2
-}
