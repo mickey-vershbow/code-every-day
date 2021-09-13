@@ -110,7 +110,6 @@ var romanToInt = function (s) {
   return answer;
 };
 
-
 /////////////////////////////////////////
 // Linked List Cycle (LC141)
 //////////////////////////////////////////
@@ -131,7 +130,6 @@ const hasCycle = function (linkedList) {
 };
 
 console.log(hasCycle([3, 2, 0, -4]));
-
 
 ///////////////////////////////////////////
 // Return a list of multiples up to limit
@@ -179,3 +177,65 @@ twoSort([
   "one",
   "day",
 ]);
+
+//////////////////////////////////////
+// LeetCode -- Longest Common Prefix
+//////////////////////////////////////
+const longestCommonPrefix = (strs) => {
+  let prefix = '';
+  // return empty string if length is 0
+  if (strs.length === 0) return prefix;
+  //
+  for (let i = 0; i < strs[0].length; i++) {
+    console.log(i)
+  }
+  return prefix;
+};
+
+console.log(longestCommonPrefix(["flower", "flow", "flight"]));
+
+//Write a function to find the longest common prefix string amongst an array of strings.
+
+//If there is no common prefix, return an empty string "".
+
+
+//////////////////////////////////////////////////
+// Leetcode #88 Merge Sorted Arrays
+//////////////////////////////////////////////////
+
+const merge = (nums1, m, nums2, n) => {
+  let p1 = m - 1;
+  let p2 = n - 1;
+
+  for (let i = m + n - 1; i >= 0; i--) {
+    if (p2 < 0) break;
+
+    if (nums1[p1] > nums2[p2]) {
+      nums1[i] = nums1[p1];
+      p1--;
+    } else {
+      nums1[i] = nums2[p2];
+      p2--;
+    }
+  }
+  return nums1;
+};
+
+console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
+
+//! FASTER VERSION
+const merge2 = (nums1, m, nums2, n) => {
+  // set insertPos to index position 5
+  let insertPos = m+n-1;
+
+  // set m and n to the last index in the arrays
+  m--;
+  n--;
+// loop through nums2, set the nums1[insertPos] to either nums1[m] or nums2[n] based on condition, and decrement the loop.
+  while (n >= 0) {
+    nums1[insertPos--] = (nums1[m] > nums2[n]) ? nums1[m--] : nums2[n--];
+  }
+  return nums1;
+}
+
+console.log(merge2([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
