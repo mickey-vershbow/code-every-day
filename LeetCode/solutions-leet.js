@@ -182,12 +182,12 @@ twoSort([
 // LeetCode -- Longest Common Prefix
 //////////////////////////////////////
 const longestCommonPrefix = (strs) => {
-  let prefix = '';
+  let prefix = "";
   // return empty string if length is 0
   if (strs.length === 0) return prefix;
   //
   for (let i = 0; i < strs[0].length; i++) {
-    console.log(i)
+    console.log(i);
   }
   return prefix;
 };
@@ -198,21 +198,25 @@ console.log(longestCommonPrefix(["flower", "flow", "flight"]));
 
 //If there is no common prefix, return an empty string "".
 
-
 //////////////////////////////////////////////////
 // Leetcode #88 Merge Sorted Arrays
-//////////////////////////////////////////////////
+/////////////////////////////////////////////////
 
 const merge = (nums1, m, nums2, n) => {
+  // create two pointers and set them to the end of each array. Pointer1 will loop through nums1, Pointer2 will loop through nums2
   let p1 = m - 1;
   let p2 = n - 1;
 
+  // loop backwards through m+n, set i to begin at the end of the array and decrement with each iteration
   for (let i = m + n - 1; i >= 0; i--) {
+    // if pointer 2 (looping through nums2) is less than zero, break the loop
     if (p2 < 0) break;
 
+    // if pointer1 is bigger than pointer 2, than nums[i] = value of pointer1. Decrement pointer1 and i.
     if (nums1[p1] > nums2[p2]) {
       nums1[i] = nums1[p1];
       p1--;
+      // ELSE, if pointer1 is less than pointer2, set nums[i] to value of pointer2 and decrement pointer2
     } else {
       nums1[i] = nums2[p2];
       p2--;
@@ -226,16 +230,16 @@ console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
 //! FASTER VERSION
 const merge2 = (nums1, m, nums2, n) => {
   // set insertPos to index position 5
-  let insertPos = m+n-1;
+  let insertPos = m + n - 1;
 
   // set m and n to the last index in the arrays
   m--;
   n--;
-// loop through nums2, set the nums1[insertPos] to either nums1[m] or nums2[n] based on condition, and decrement the loop.
+  // loop through nums2, set the nums1[insertPos] to either nums1[m] or nums2[n] based on condition, and decrement the loop.
   while (n >= 0) {
-    nums1[insertPos--] = (nums1[m] > nums2[n]) ? nums1[m--] : nums2[n--];
+    nums1[insertPos--] = nums1[m] > nums2[n] ? nums1[m--] : nums2[n--];
   }
   return nums1;
-}
+};
 
 console.log(merge2([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));

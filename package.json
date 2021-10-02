@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/mickey-vershbow/code-every-day/issues"
   },
-  "homepage": "https://github.com/mickey-vershbow/code-every-day#readme"
+  "homepage": "https://github.com/mickey-vershbow/code-every-day#readme",
+  "devDependencies": {}
 }

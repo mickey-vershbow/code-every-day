@@ -79,9 +79,19 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 
 **Thoughts** Need to spend more time solving challenges on my own, however I can, before studying optimal solutions. Practice writing nested loops and then you can optimize!
 
-
 ### Days 27-33: August 29 - September 4, 2021
 
 **Progress** Learned about linked list, wrote a solution to determine if it has a cycle. Completed several algorithm challenges with Kyle. Conquered CSS Grid and used it to style the forms on AHP to wireframe spec. Networked on Out In Tech, connected with Rhys Ryan of Ekkobar and will begin learning Python next week.
 
 **Thoughts** I'm excited to see how quickly I can learn Python now that I have a better understanding of the basic patterns in all programming languages (variables, data types, getters and setters, functions, conditionals, loops)
+
+### Days 27-35: September 5 - 13, 2021
+
+**Progress** I've been coding every day! At the moment I'm still working on this volunteer project, which mostly involves a ton of styling with CSS grid. I did some work for a startup creating an admin panel using Google Data Studio. Otherwise continuing to study algorithms and data structures. Most recently I solved the Merge Sorted Arrays problem on LeetCode.
+
+### OCTOBER 2nd, 2021
+
+**Progress**
+-- I've been building real apps for real people! Flexing my MERN stack muscles and currently working on pagination for an index of cards.
+-- Algo and CS practice, today was insertion sort
+-- Built a dynamic "traffic light" with React
