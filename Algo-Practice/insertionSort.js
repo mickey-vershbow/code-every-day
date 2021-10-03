@@ -25,12 +25,12 @@ console.log(insertionSort(arr));
 
 /////////////////////
 
-function insertionSort(items) {
+function insertionSort2(items) {
   for (var i = 0; i < items.length; i++) {
     let value = items[i];
     // store the current item value so it can be placed right
     for (var j = i - 1; j > -1 && items[j] > value; j--) {
-      // loop through the items in the sorted array (the items from the current to the beginning)
+      // loop through the items in the sortzxed array (the items from the current to the beginning)
       // copy each item to the next one
       items[j + 1] = items[j];
     }
@@ -38,8 +38,8 @@ function insertionSort(items) {
     items[j + 1] = value;
   }
 
-  return list;
+  return items;
 }
 
-const list = [54, 26, 93, 17, 77, 31, 44, 55, 20];
-console.log(insertionSort(list));
+const list2 = [54, 26, 93, 17, 77, 31, 44, 55, 20];
+console.log(insertionSort2(list2));
