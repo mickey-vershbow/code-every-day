@@ -64,31 +64,43 @@ let Mickey = new Student(
   2
 );
 
-// console.log(Mickey.bio());
-// console.log(Mickey.siblings);
+console.log(Mickey.bio());
 
 class Teacher extends Person {
-  constructor(first, last, age, gender, interests, subject) {
+  constructor(first, last, age, gender, interests, subject, grade) {
     super(first, last, age, gender, interests);
     this.subject = subject;
+    this.grade = grade;
   }
 
   greeting() {
     const { first, last } = this.name;
     console.log(
-      `Hi everyone, I'm ${first}, I'll be teaching your ${this.subject} class today.`
+      `Hi everyone, I'm ${first} ${last}, I'll be teaching your ${this.subject} class today.`
     );
   }
+
+  // get subject() {
+  //   console.log(this._subject)
+  // }
+
+  // set subject(newSubject) {
+  //   this._subject = newSubject;
+  // }
 }
 
-let Jen = new Teacher(
-  "Jen",
-  "Vershbow",
-  "30",
+let MsSmith = new Teacher(
+  "Ms.",
+  "Smith",
+  "35",
   "Female",
-  ["fitness", "cooking"],
-  "fitness"
+  ["reading", "cooking", "hiking"],
+  "English",
+  "Third Grade"
 );
 
-// console.log(Jen.bio());
-// console.log(Jen.greeting());
+MsSmith.subject = "Social Science"
+console.log(MsSmith.subject)
+
+console.log(MsSmith.bio());
+console.log(MsSmith.greeting());
