@@ -95,3 +95,11 @@ I had absolutely no idea how to approach the second question, as I haven't learn
 -- I've been building real apps for real people! Flexing my MERN stack muscles and currently working on pagination for an index of cards.
 -- Algo and CS practice, today was insertion sort
 -- Built a dynamic "traffic light" with React
+
+
+### OCTOBER 5th, 2021
+
+**Progress**
+-- Putting in the reps with OOP. I can now define OOP, describe the four pillars of OOP with real-world examples, and code up class hierarchies and object instances with relative ease.
+-- Working on building stuff with some logic to implement. Today I redid the GA Streetfighter Lab. I was able to code up my own version in 1.5 hours, which was huge compared to having a really hard time with every single line back in Bootcamp. Now I could mostly do it on my own but I got stuck at the game logic, of course. The while loop got stuck in an infinite loop. The conditionals were way too repetitive. The toggle didn't quite work. Overall I got the bones of it though, maybe 80%. Then I looked back at how I successfully solved it last time, tweaked mine a bit, and got there. Tomorrow I will build it again and then try Blackjack.
+-- Need to also do some actual HackerRank challenges
