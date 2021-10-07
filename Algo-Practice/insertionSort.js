@@ -1,6 +1,6 @@
-const arr = [2, 4, 9, 14, 23, 7];
+// const arr = [2, 4, 9, 14, 23, 7];
 
-const insertionSort = (arr) => {
+function insertionSort(arr) {
   // loop through array starting at index 1, store value of arr[i] in variable called cur
   // initiate j variable to iterate through the loop starting at i-1
   for (let i = 1; i < arr.length; i++) {
@@ -21,25 +21,28 @@ const insertionSort = (arr) => {
   return arr;
 };
 
-console.log(insertionSort(arr));
+// console.log(insertionSort(arr));
 
 /////////////////////
 
-function insertionSort2(items) {
-  for (var i = 0; i < items.length; i++) {
-    let value = items[i];
-    // store the current item value so it can be placed right
-    for (var j = i - 1; j > -1 && items[j] > value; j--) {
-      // loop through the items in the sortzxed array (the items from the current to the beginning)
-      // copy each item to the next one
-      items[j + 1] = items[j];
-    }
-    // the last item we've reached should now hold the value of the currently sorted item
-    items[j + 1] = value;
-  }
+// function insertionSort2(items) {
+//   for (var i = 0; i < items.length; i++) {
+//     let value = items[i];
+//     // store the current item value so it can be placed right
+//     for (var j = i - 1; j > -1 && items[j] > value; j--) {
+//       // loop through the items in the sortzxed array (the items from the current to the beginning)
+//       // copy each item to the next one
+//       items[j + 1] = items[j];
+//     }
+//     // the last item we've reached should now hold the value of the currently sorted item
+//     items[j + 1] = value;
+//   }
 
-  return items;
-}
+//   return items;
+// }
 
-const list2 = [54, 26, 93, 17, 77, 31, 44, 55, 20];
-console.log(insertionSort2(list2));
+// const list2 = [54, 26, 93, 17, 77, 31, 44, 55, 20];
+// console.log(insertionSort2(list2));
+
+
+module.exports = insertionSort;

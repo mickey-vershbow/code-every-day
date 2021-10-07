@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,6 @@
     "jest": "^27.2.4"
   },
   "dependencies": {
-    "mocha": "^9.1.2"
+    "prompt-sync": "^4.2.0"
   }
 }

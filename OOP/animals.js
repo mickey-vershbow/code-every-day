@@ -25,4 +25,4 @@ class Pig extends Animal {
 let Wilbur = new Pig("Wilbur", "pink");
 let Johnny = new Pig("Johnny", "brown");
 
-console.log(Wilbur, Johnny);
+// console.log(Wilbur, Johnny);
