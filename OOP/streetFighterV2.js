@@ -43,21 +43,14 @@ class Fighter {
 // Write game logic
 ////////////////////
 
-// Create variable to start and end the game
-let gameIsOver = false;
-
-// function to log fighter health
-const logHealth = () => {
-  console.log(
-    `${player1} health: ${player1.health}; ${player2} health: ${player2.health}`
-  );
-};
-
+// Variables
 let player1;
 let player2;
+let gameIsOver = false;
+let runLoop = true;
+let player1Turn = true;
 
 // Generate Fighters
-let runLoop = true;
 while (runLoop) {
   player1 = new Fighter("Ryu");
   player2 = new Fighter("Ken");
@@ -82,13 +75,22 @@ while (runLoop) {
 
 // Create a loop that does the following: the two fighers attack each other, and if one fighter's health hits 0, the loop should break
 
-let activePlayer = player1;
-
 while (!gameIsOver) {
-  // function to change turns
-  const changeTurn = () => {
-    activePlayer = activePlayer == player1 ? player2 : player1;
-  };
-}
+  // run the game
+  if (player1Turn) {
+    player1.attack(player2);
+  } else {
+    player2.attack(player1);
+  }
 
-// log the winner if the loop breaks
+  player1Turn = !player1Turn;
+
+  // quit the loop if either player health hits 0
+  if (player1.health == 0) {
+    console.log(`Player2 has won!`);
+    gameIsOver = true;
+  } else if (player2.health === 0) {
+    console.log(`Player1 has won!`);
+    gameIsOver = true;
+  }
+}
