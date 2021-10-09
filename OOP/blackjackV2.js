@@ -58,9 +58,7 @@ class Deck {
     return this;
   }
   deal() {
-    for (let i = 0; i < 2; i++) {
-      return this.deck.pop();
-    }
+    return this.deck.pop();
   }
 }
 
@@ -78,8 +76,25 @@ let house = new Player("The House", [], "1000");
 
 let gameIsOver = false;
 while (!gameIsOver) {
+  // deal cards
   player1.hand.push(deck1.deal(), deck1.deal());
   house.hand.push(deck1.deal(), deck1.deal());
-  console.log(player1.hand, house.hand);
+  // console.log(
+  //   "Player1 hand is " + player1.hand + ", and The House hand is " + house.hand
+  // );
+  console.log("Player 1: ", player1.hand);
+  console.log("The House: ", house.hand);
+  // determine winner
+
+  if (player1.hand[0] + player1.hand[1] >= house.hand[0] + house.hand[1]) {
+    console.log(
+      "Player 1 wins with a total of " + (player1.hand[0] + player1.hand[1])
+    );
+  } else {
+    console.log(
+      "House wins with a total of " + (house.hand[0] + house.hand[1])
+    );
+  }
+
   gameIsOver = true;
 }
