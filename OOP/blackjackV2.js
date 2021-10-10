@@ -28,10 +28,13 @@ class Player {
         this.hand[i].value = "10";
       }
     }
-    // for(let i = 0; i < this.hand.length; i++){
-    //   this.hand.value[i] = Number(this.hand.value[i])
-    //   console.log(this.hand.value[i])
+    // for (let i = 0; i < this.hand.length; i++) {
+    //   this.hand.value[i] = Number(this.hand.value[i]);
+    //   console.log(this.hand.value[i]);
     // }
+    // const reducer = (previousValue, currentValue) =>
+    //   previousValue + currentValue;
+    // return this.hand.reduce(reducer);
     let sumHand = Number(this.hand[0].value) + Number(this.hand[1].value);
     return sumHand;
   }
@@ -125,7 +128,11 @@ const winner = () => {
         player1.bankroll
       }.`
     );
-  } else if (player1.sum() > 21 || house.sum() === 21 || house.sum() > player1.sum() && house.sum() < 21) {
+  } else if (
+    player1.sum() > 21 ||
+    house.sum() === 21 ||
+    (house.sum() > player1.sum() && house.sum() < 21)
+  ) {
     player1.bankroll -= 10;
     console.log(
       `You lost! The house total is ${house.sum()} and The House' total is ${player1.sum()}.Your bankroll is now $${
