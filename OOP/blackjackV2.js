@@ -28,10 +28,13 @@ class Player {
         this.hand[i].value = "10";
       }
     }
+    // for(let i = 0; i < this.hand.length; i++){
+    //   this.hand.value[i] = Number(this.hand.value[i])
+    //   console.log(this.hand.value[i])
+    // }
     let sumHand = Number(this.hand[0].value) + Number(this.hand[1].value);
     return sumHand;
   }
-  winner(target) {}
 }
 
 class Card {
@@ -98,20 +101,23 @@ class Deck {
 ///////////////////////
 // Game Logic
 //////////////////////
-// CREATE DECK
+
+// VARIABLES
+
+// create deck
 let deck1 = new Deck();
 
-//create players
+// create players
 let player1 = new Player("Mickey", [], 100);
 let house = new Player("The House", [], 1000);
 
-//variable to start and end the game
+// variable to start and end the game
 let gameIsOver = false;
 // FUNCTION TO DETERMINE WINNER
 const winner = () => {
   if (
     player1.sum() === 21 ||
-    (player1.sum() > house.sum() && player1.sum() <= 21)
+    (player1.sum() <= 21 && player1.sum() > house.sum())
   ) {
     player1.bankroll += 10;
     console.log(
@@ -119,10 +125,10 @@ const winner = () => {
         player1.bankroll
       }.`
     );
-  } else {
+  } else if (player1.sum() > 21 || house.sum() === 21 || house.sum() > player1.sum() && house.sum() < 21) {
     player1.bankroll -= 10;
     console.log(
-      `You lost! The house total is $${house.sum()} and The House' total is ${player1.sum()}.Your bankroll is now $${
+      `You lost! The house total is ${house.sum()} and The House' total is ${player1.sum()}.Your bankroll is now $${
         player1.bankroll
       }.`
     );
@@ -130,7 +136,9 @@ const winner = () => {
   gameIsOver = true;
 };
 
-// game loop
+///////////////
+// GAME LOOP
+//////////////
 while (!gameIsOver) {
   // prompt user for name
   const playerName = prompt("What is your name?");
@@ -146,7 +154,7 @@ while (!gameIsOver) {
   // prompt for deal or quit
   let dealPrompt = prompt("Would you like to (d)eal or (q)uit?");
 
-  // DEAL CARD
+  // IF PLAYER CHOOSES TO DEAL CARD
   if (dealPrompt === "d") {
     // deal player another card
     player1.hand.push(deck1.deal());
@@ -159,7 +167,7 @@ while (!gameIsOver) {
         "Would you like to (d)eal another card or (q)uit?"
       );
 
-      // if player chooses to deal another card
+      // IF PLAYER CHOOSES TO DEAL ANOTHER CARD
       if (dealPrompt2 === "d") {
         player1.hand.push(deck1.deal());
         console.log("Player 1: ", player1.hand);
@@ -167,7 +175,7 @@ while (!gameIsOver) {
         // DETERMINE WINNER
         winner();
 
-        // PLAYER CHOOSES TO QUIT
+        // ELSE IF PLAYER CHOOSES TO QUIT AFTER dealPrompt2
       } else {
         winner();
       }
@@ -177,21 +185,7 @@ while (!gameIsOver) {
       winner();
     }
 
-    // PLAY ANOTHER GAME?
-    // let gamePrompt = prompt("Would you like to play another round? Y/n");
-    // if (gamePrompt === "Y") {
-    //   player1.hand = [];
-    //   house.hand = [];
-    //   player1.hand.push(deck1.deal(), deck1.deal());
-    //   house.hand.push(deck1.deal(), deck1.deal());
-    //   console.log("Player 1: ", player1.hand);
-    //   console.log("The House: ", house.hand);
-    //   // LOGIC FOR PLAYING ANOTHER GAME
-    // } else {
-    //   gameIsOver = true;
-    // }
-
-    // PLAYER CHOOSES TO QUIT AFTER FIRST DEAL PROMPT
+    // IF PLAYER CHOOSES TO QUIT AFTER FIRST DEAL PROMPT
   } else {
     winner();
   }
