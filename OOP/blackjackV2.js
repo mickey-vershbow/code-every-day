@@ -146,16 +146,16 @@ const winner = () => {
 // Prompt to play another round after game ends
 const anotherGamePrompt = () => {
   let gamePrompt = prompt("Would you like to play another round? Y/n ");
-  if(gamePrompt === "Y"){
+  if (gamePrompt === "Y") {
     gameLoop();
   } else {
     gameIsOver = true;
   }
-}
+};
 
-///////////////
-// GAME LOOP
-//////////////
+/////////////////////////////////////////////////////////
+// GAME LOOP -- will run when called below in "RUN LOOP"
+////////////////////////////////////////////////////////
 
 const gameLoop = () => {
   // clear hands, deal two new cards, start game
