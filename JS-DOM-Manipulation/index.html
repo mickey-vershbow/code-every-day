@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Javascript -->
+
+    <script type="text/javascript">
+
+    //////////////////////////////
+    // Functions
+    //////////////////////////////
+
+      // Change Subheader Text
+      function newSubheader(str) {
+        let newTitle = document.getElementById("subheader");
+        newTitle.innerText = str;
+        console.log(`The new subheader is: ` + newTitle.innerText);
+      }
+
+      // Display random images
+      function randomImage(str) {
+        document.getElementById("randomImage").src = str;
+        console.log(document.getElementById("randomImage"));
+      }
+
+      ///////////////////
+      //   RUN SCRIPT
+      ///////////////////
+
+      $(document).ready(function () {
+        // Testing
+        console.log("Ready Freddy!");
+
+        // Change subheader
+        newSubheader("DOM Manipulation For Dummies");
+
+        // Display image on intial page load
+        randomImage(
+          "https://randomwordgenerator.com/img/picture-generator/52e1d3424b5ba814f1dc8460962e33791c3ad6e04e5074417d2e72d2914ec3_640.jpg"
+        );
+
+        // Generate new image
+        let generateImageBtn = document.getElementById("generateImageBtn");
+        generateImageBtn.addEventListener("click", function () {
+          randomImage(
+            "https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+          );
+        });
+
+        // Add 
+      });
+    </script>
+    <!-- HTML -->
+    <h1>Experiments Are Fun:</h1>
+    <h2 id="subheader" class="subheader">Basic DOM Manipulation</h2>
+    <p class="mainText" id="mainText-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita numquam
+      voluptatem labore iure sequi molestias error optio accusamus quae.
+      Architecto illum dignissimos laboriosam repellendus quos cum doloremque,
+      fuga sunt porro.
+    </p>
+    <p class="mainText" id="mainText-2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, assumenda
+      quam? Accusamus quia obcaecati quo et molestias cumque. Voluptates iste
+      numquam adipisci commodi unde at fugit eius non facere officiis.
+    </p>
+    <p class="mainText" id="mainText-3">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quae quidem
+      obcaecati doloribus maiores voluptates ducimus dignissimos, assumenda
+      corrupti nam commodi earum mollitia ad quos. Et perspiciatis porro a ea?
+    </p>
+    <div id="randomImageContainer">
+      <img src="" alt="" id="randomImage" />
+    </div>
+    <button id="generateImageBtn" class="btn">Generate Random Image</button>
+  </body>
+</html>
