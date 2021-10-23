@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ekkobar Surface: Home</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <!-- CSS Standard Styles -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Add-on Scripts -->
+    <link href="css/base.css" rel="stylesheet" />
+
+    <!-- JS Standard Scripts -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+
+    <!-- JS Add-on Scripts -->
+    <script src="js/base.js"></script>
+
+    <!-- page javascript -->
+    <script type="text/javascript">
+      // global variables
+      let sessionToken = null;
+
+      //////////////////////////
+      // Document Is Ready
+      /////////////////////////
+      $(document).ready(function () {
+        // get session token from storage, make sure user is logged in, set account name.
+        checkLogin();
+
+        // Display orgName and logo
+        setOrgName();
+        setOrgLogo();
+
+        // Set Header Text
+        setHeaderText(0);
+
+        // Set Boxes For Initial Page Load (group = 0)
+        setBox("boxOne", 1, "B");
+        setProfileIcons("boxOneIcons", 1, "B");
+
+        setBox("boxTwo", 2, "B");
+        setProfileIcons("boxTwoIcons", 2, "B");
+
+        setBox("boxThree", 3, "B");
+        setProfileIcons("boxThreeIcons", 3, "B");
+
+        setBox("boxFour", 4, "B");
+        setProfileIcons("boxFourIcons", 4, "B");
+
+        setBox("boxFive", 5, "B");
+        setProfileIcons("boxFiveIcons", 5, "B");
+
+        setBox("boxSix", 6, "B");
+        setProfileIcons("boxSixIcons", 6, "B");
+
+        hideBoxes(["boxSeven", "boxEight"]);
+      });
+
+      //////////////////////////////////
+      //   Get Account Hierarchy Data
+      /////////////////////////////////
+      // loop through to build each object entry in the array
+      let account_hierarchy_object = JSON.parse(
+        sessionStorage.getItem("accountHierarchyData")
+      );
+      // console.log(account_hierarchy_object);
+
+      // Initialize array
+      let account_hierarchy_array = [];
+
+      for (let subs = 0; subs < account_hierarchy_object.length; subs++) {
+        // build the object
+        let temp_object = new Object();
+        temp_object.entry_type = account_hierarchy_object[subs].entry_type;
+        temp_object.level_number = temp_object.entry_count =
+          account_hierarchy_object[subs].entry_count;
+        account_hierarchy_object[subs].level_number;
+        temp_object.group_number = account_hierarchy_object[subs].group_number;
+        temp_object.parent_number =
+          account_hierarchy_object[subs].parent_number;
+        temp_object.entry_text = account_hierarchy_object[subs].entry_text;
+        temp_object.show_icon = account_hierarchy_object[subs].show_icon;
+        temp_object.show_circles = account_hierarchy_object[subs].show_circles;
+        temp_object.subject_id = account_hierarchy_object[subs].subject_id;
+        temp_object.icon_link = account_hierarchy_object[subs].icon_link;
+
+        // push into the array
+        account_hierarchy_array.push(temp_object);
+        // console.log(temp_object);
+      }
+      console.log(account_hierarchy_array);
+
+      //////////////////////////////////////////
+      // Find profiles associated with Group #
+      /////////////////////////////////////////
+      // Use this function internally if you need to see profiles associated with specified group box
+      function findProfileGroup(num) {
+        for (let property in account_hierarchy_array) {
+          let numString = num.toString();
+          if (account_hierarchy_array[property].entry_type === "P") {
+            if (account_hierarchy_array[property].group_number === numString) {
+              console.log(account_hierarchy_array[property]);
+            }
+          }
+        }
+      }
+
+      ////////////////////////////
+      // BUILD PAGE
+      ///////////////////////////
+
+      // Set Org Name
+      function setOrgName() {
+        let orgName = sessionStorage.getItem("orgName");
+        $("#orgName").append(orgName);
+      }
+
+      // Set Org Logo
+      function setOrgLogo() {
+        let orgLogo = sessionStorage.getItem("orgLogo");
+        $("#orgLogo").attr("src", orgLogo);
+      }
+
+      // Set Header Text
+      function setHeaderText(num) {
+        let headerText = account_hierarchy_array[num].entry_text;
+        let div = document.createElement("div");
+        div.id = "headerText";
+        div.innerHTML = headerText;
+        $("#header-text-container").append(div);
+      }
+
+      /////////////////////////////////
+      // Set Box Profile Icons
+      /////////////////////////////////
+
+      // get icons by group number, loop and display each. In order to use this function, the boxId must be passed in with proper syntax: "boxOneIcons", "boxTwoIcons", etc.
+      function setProfileIcons(boxId, groupNum, entryType) {
+        // Initialize Variables
+        let profilesArr = [];
+        let iconsArr = [];
+        let dataArray = account_hierarchy_array;
+        let num = groupNum.toString();
+
+        // Loop through account hierarchy data to build the profilesArr array with all the "P" entry types.
+        for (let i = 0; i < dataArray.length; i++) {
+          if (dataArray[i].entry_type === "P") {
+            profilesArr.push(dataArray[i]);
+          }
+        }
+
+        // Then, Loop through the profilesArr array to grab all the profiles that meet the group number we passed in ("groupNum"). Push all the results into the iconsArr array.
+        for (let i = 0; i < profilesArr.length; i++) {
+          if (profilesArr[i].group_number === num) {
+            iconsArr.push(profilesArr[i]);
+          }
+        }
+
+        // Loop through each item in iconsArr, create Image tag in HTML, and append the images to whichever group box is passed in ("boxId")
+        for (let img in iconsArr) {
+          let iconLink = iconsArr[img].icon_link;
+
+          // Create <img>
+          let imgTag = document.createElement("img");
+          $(imgTag).attr("src", iconLink);
+          imgTag.className = "profile-icons";
+          imgTag.id = boxId + "__Img";
+
+          // Create div for <img>
+          let imgDiv = document.createElement("div");
+          imgDiv.className = "profile-icon__container";
+          $(imgDiv).append(imgTag);
+          $(`#${boxId}`).append(imgDiv);
+        }
+      }
+
+      ////////////////////////
+      // Reset Box
+      ////////////////////////
+
+      // Parameter = {Array} ["boxOne", "boxTwo"]
+      function resetBox(boxArr, entryType) {
+        for (let box in boxArr) {
+          // Header Text
+          $("#headerText").remove();
+          if (entryType === "B") {
+            // Logo
+            let logo = document.getElementById(`${boxArr[box]}LogoContainer`);
+            $(logo).remove();
+            // Name
+            let name = document.getElementById(`${boxArr[box]}Name`);
+            $(name).remove();
+            // console.log("removed name");
+            // Icons
+            let icons = document.getElementById(`${boxArr[box]}Icons`);
+            console.log(icons);
+            $(icons).empty();
+            // console.log("removed icons");
+            // Count
+            let count = document.getElementById(`${boxArr[box]}Count`);
+            $(count).remove();
+            // console.log("removed count");
+            // type
+            let type = document.getElementById(`${boxArr[box]}EntryType`);
+            type.innerHTML = "";
+            // console.log("removed previous entry type");
+            // Else if Entry Type = "P"
+          } else if (entryType === "P") {
+            // Logo
+            let logo = document.getElementById(
+              `${boxArr[box]}LogoContainer__B`
+            );
+            $(logo).remove();
+            // Name
+            let name = document.getElementById(`${boxArr[box]}Name__B`);
+            $(name).remove();
+            console.log("removed B name");
+            // Icons
+            let icons = document.getElementById(`${boxArr[box]}Icons`);
+            $(icons).empty();
+            console.log("removed B icons");
+            // Count
+            let count = document.getElementById(`${boxArr[box]}Count`);
+            $(count).remove();
+            console.log("removed B count");
+            // type
+            let type = document.getElementById(`${boxArr[box]}EntryType`);
+            type.innerHTML = "";
+            console.log("removed previous entry type");
+          }
+        }
+      }
+
+      //////////////////////////
+      // Hide Boxes
+      ////////////////////////
+
+      function hideBoxes(boxArr) {
+        for (let box in boxArr) {
+          let boxId = boxArr[box];
+          let div = document.getElementById(boxArr[box]);
+          $(div).hide();
+        }
+      }
+
+      /////////////////////////////////////////
+      // Set Box
+      // Conditionals for whether box type = "B" or "P"
+      ///////////////////////////////////////
+
+      // Param arrIndex = {Int}
+      // Param boxId = {String}
+
+      function setBox(boxId, arrIndex, entryType) {
+        // Set Array Index
+        let group = account_hierarchy_array[arrIndex];
+
+        // If entry_type = "B",
+        if (entryType === "B") {
+          // Logo
+          let groupLogo = group.icon_link;
+          let img = document.createElement("img");
+          img.id = `${boxId}GroupLogo`;
+          img.className = "group-box-logo";
+          $(img).attr("src", groupLogo);
+          let logoContainer = document.createElement("div");
+          logoContainer.className = "group-box-logo__container";
+          logoContainer.id = `${boxId}LogoContainer`;
+          $(logoContainer).append(img);
+          $(`#group-box-header__${boxId}`).append(logoContainer);
+
+          // Name
+          let entryTextDiv = document.createElement("div");
+          entryTextDiv.className = "group-box-name";
+          entryTextDiv.id = `${boxId}Name`;
+          let entry_text = group.entry_text;
+          entryTextDiv.innerHTML = entry_text;
+          $(`#group-box-header__${boxId}`).append(entryTextDiv);
+
+          // Entry Count
+          let entryCountDiv = document.createElement("div");
+          entryCountDiv.className = "group-box-count";
+          entryCountDiv.id = `${boxId}Count`;
+          let entry_count = group.entry_count;
+          entryCountDiv.innerHTML = entry_count;
+          $(`#${boxId}`).append(entryCountDiv);
+
+          // Entry Type (hidden)
+          let typeDiv = document.getElementById(`${boxId}EntryType`);
+          typeDiv.innerHTML = entryType;
+          $(`#${boxId}EntryType`).hide();
+
+          // Else if entryType === "P", run same code, except assign unique classNames and id's for styling purposes
+        } else if (entryType === "P") {
+          // Header section container styling
+          $(".group-box-header").css("display", "block");
+
+          // Logo
+          let groupLogo = group.icon_link;
+          let img = document.createElement("img");
+          img.id = `${boxId}GroupLogo__B`;
+          img.className = "group-box-logo__B";
+          $(img).attr("src", groupLogo);
+          let logoContainer = document.createElement("div");
+          logoContainer.className = "group-box-logo__container__B";
+          logoContainer.id = `${boxId}LogoContainer__B`;
+          $(logoContainer).append(img);
+          $(`#group-box-header__${boxId}`).append(logoContainer);
+
+          // Name
+          let entryTextDiv = document.createElement("div");
+          entryTextDiv.className = "group-box-name__B";
+          entryTextDiv.id = `${boxId}Name__B`;
+          let entry_text = group.entry_text;
+          entryTextDiv.innerHTML = entry_text;
+          $(`#group-box-header__${boxId}`).append(entryTextDiv);
+
+          // Entry Type (hidden)
+          let typeDiv = document.getElementById(`${boxId}EntryType`);
+          typeDiv.innerHTML = entryType;
+          $(`#${boxId}EntryType`).hide();
+        }
+
+        // Event Listener For Updating Boxes
+        document
+          .getElementById(boxId)
+          .addEventListener("click", function levelUp() {
+            if (boxId === "boxOne") {
+              boxOneLevelUp();
+            } else if (boxId === "boxTwo") {
+              boxTwoLevelUp();
+            } else if (boxId === "boxThree") {
+              boxThreeLevelUp();
+            } else if (boxId === "boxFour") {
+              boxFourLevelUp();
+            } else if (boxId === "boxFive") {
+              boxFiveLevelUp();
+            } else if (boxId === "boxSix") {
+              boxSixLevelUp();
+            } else {
+              throw new Error(
+                "boxId must be a string, such as 'boxOne' or 'boxTwo'"
+              );
+            }
+          });
+      }
+
+      ///////////////////
+      // Box LEVEL UP
+      //////////////////
+      // These functions run as "click" event listeners attached to each box
+
+      function boxOneLevelUp() {
+        let type = document.getElementById("boxOneEntryType").innerHTML;
+        // check entry type (B, P, or H)
+        if (type === "P") {
+          console.log("redirect to subject HTML Page");
+        } else {
+          console.log("Box One level up");
+          setHeaderText(7);
+          resetBox(["boxOne"], "B");
+          setBox("boxOne", 8, "P");
+          hideBoxes([
+            "boxTwo",
+            "boxThree",
+            "boxFour",
+            "boxFive",
+            "boxSix",
+            "boxSeven",
+            "boxEight",
+          ]);
+        }
+      }
+
+      function boxTwoLevelUp() {
+        let type = document.getElementById("boxTwoEntryType").innerHTML;
+        if (type === "P") {
+          console.log("redirect to subject HTML Page");
+        } else {
+          console.log("Box Two level up");
+          resetBox(["boxOne", "boxTwo", "boxThree", "boxFour", "boxFive"], "B");
+          setHeaderText(9);
+          setBox("boxOne", 10, "P");
+          setBox("boxTwo", 11, "P");
+          setBox("boxThree", 12, "P");
+          setBox("boxFour", 13, "P");
+          setBox("boxFive", 14, "P");
+          hideBoxes(["boxSix", "boxSeven", "boxEight"]);
+        }
+      }
+
+      function boxThreeLevelUp() {
+        let type = document.getElementById("boxThreeEntryType").innerHTML;
+        console.log("Box Three level up");
+        if (type === "P") {
+          console.log("redirect to subject HTML Page");
+        } else {
+          resetBox(["boxOne", "boxTwo", "boxThree"], "B");
+          setHeaderText(15);
+          setBox("boxOne", 16, "P");
+          setBox("boxTwo", 17, "P");
+          hideBoxes([
+            "boxThree",
+            "boxFour",
+            "boxFive",
+            "boxSix",
+            "boxSeven",
+            "boxEight",
+          ]);
+        }
+      }
+
+      function boxFourLevelUp() {
+        let type = document.getElementById("boxFourEntryType").innerHTML;
+        if (type === "P") {
+          console.log("redirect to subject HTML Page");
+        } else {
+          console.log("Box Four level up");
+          resetBox(["boxOne", "boxTwo", "boxThree", "boxFour"], "B");
+          setHeaderText(18);
+          setBox("boxOne", 19, "P");
+          setBox("boxTwo", 20, "P");
+          setBox("boxThree", 21, "P");
+          setBox("boxFour", 22, "P");
+          hideBoxes(["boxFive", "boxSix", "boxSeven", "boxEight"]);
+        }
+      }
+
+      function boxFiveLevelUp() {
+        let type = document.getElementById("boxFiveEntryType").innerHTML;
+        if (type === "P") {
+          console.log("redirect to subject HTML Page");
+        } else {
+          console.log("Box Five level up");
+          resetBox(["boxOne", "boxTwo", "boxThree"], "B");
+          setHeaderText(23, "P");
+          setBox("boxOne", 24, "P");
+          setBox("boxTwo", 25, "P");
+          setBox("boxThree", 26, "P");
+          hideBoxes(["boxFour", "boxFive", "boxSix", "boxSeven", "boxEight"]);
+        }
+      }
+
+      function boxSixLevelUp() {
+        let type = document.getElementById("boxSixEntryType").innerHTML;
+        if (type === "P") {
+          console.log("redirect to subject HTML Page");
+        } else {
+          console.log("Box Six level up");
+          resetBox(["boxOne", "boxTwo"], "B");
+          setHeaderText(27);
+          setBox("boxOne", 28, "P");
+          setBox("boxTwo", 29, "P");
+          hideBoxes([
+            "boxThree",
+            "boxFour",
+            "boxFive",
+            "boxSix",
+            "boxSeven",
+            "boxEight",
+          ]);
+        }
+      }
+
+      ///////////////////
+      // Go Back (Button)
+      ///////////////////
+
+      function goBack() {
+        // drill upwards
+        console.log("drill upwards");
+        resetBox(
+          ["boxOne", "boxTwo", "boxThree", "boxFour", "boxFive", "boxSix"],
+          "P"
+        );
+
+        console.log("reset boxes 1-6");
+
+        // Set Header Text
+        setHeaderText(0);
+
+        // Set boxes
+        // setBox("boxOne", 1, "B");
+        // setProfileIcons("boxOneIcons", 1);
+
+        // setBox("boxTwo", 2, "B");
+        // setProfileIcons("boxTwoIcons", 2);
+
+        // setBox("boxThree", 3, "B");
+        // setProfileIcons("boxThreeIcons", 3);
+
+        // setBox("boxFour", 4, "B");
+        // setProfileIcons("boxFourIcons", 4);
+
+        // setBox("boxFive", 5, "B");
+        // setProfileIcons("boxFiveIcons", 5);
+
+        // setBox("boxSix", 6, "B");
+        // setProfileIcons("boxSixIcons", 6);
+
+        // hideBoxes(["boxSeven", "boxEight"]);
+      }
+
+      //////////////////////////
+      // Example AJAX Call
+      /////////////////////////
+
+      // below is an example of an AJAX call with support for handling security errors
+      //
+      // local variables
+      // var ajaxResult;
+      // var subs;
+      // var tempString;
+
+      // send the request to the server and process the results
+      // $.LoadingOverlay("show");
+      // $.ajax({
+      // 	type:	"GET",
+      // 	url:	"get_url",
+      // 	data:	{
+      // 			field_name: field_value,
+      // 			field_name: field_value
+      // 	}
+
+      // process the returned result of the Ajax call
+      // success: function(ajaxResult) {
+
+      // see if we have a session token and handle the response
+      // data = ajaxResult['data_label'];
+
+      // },
+
+      // process after the Ajax call has been fully completed
+      // complete: function() {
+      // $.LoadingOverlay("hide");
+      // },
+
+      // handle failure
+      // error: function(jqXHR, exception) {
+      // console.log(jqXHR);
+      // console.log(exception);
+      // json_error = jqXHR['responseJSON']
+      // if (jqXHR.status === 401) {
+      // doLogoutError(json_error.error_message);
+      // } else {
+      // $('#errorText').html(json_error.error_message);
+      // $('#errorModal').modal('show');
+      // }
+      // }
+
+      // });
+    </script>
+
+    <!------------------ HTML ---------------->
+  </head>
+  <body>
+    <!-- error modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+          </div>
+          <div style="padding: 15px">
+            <div class="modal-body alert alert-danger">
+              <span id="errorText"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main page -->
+    <div class="container-fluid">
+      <!-- header -->
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="static-top">
+            <a href="main.html"
+              ><img
+                src="images/logo.jpg"
+                height="60"
+                style="padding-top: 15px; padding-left: 3px"
+            /></a>
+            <div
+              style="
+                margin-left: auto;
+                margin-right: 0;
+                float: right;
+                padding-top: 20px;
+              "
+            >
+              <b
+                ><span
+                  id="accountName"
+                  style="top: 1px; position: relative"
+                ></span
+              ></b>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="javascript:doLogout();"
+                ><img src="images/logout.png"
+              /></a>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <!-- main area -->
+      <div class="row">
+        <div class="col-md-12" style="padding-left: 30px; padding-top: 25px">
+          <div class="org-name-container">
+            <img src="" id="orgLogo" alt="" />
+            <span id="orgName"></span>
+          </div>
+
+          <div id="back-button-container">
+            <button
+              id="back-button"
+              class="button back-button"
+              onclick="goBack()"
+            >
+              Go Back
+            </button>
+          </div>
+          <div class="account-hierarchy-container">
+            <div id="header-text-container"></div>
+
+            <!---------- Box One ----------->
+            <div id="boxOne" class="group-box-container">
+              <!-- Container for Logo+Name "header" section -->
+              <div class="group-box-header" id="group-box-header__boxOne"></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxOneIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxOneEntryType"></div>
+            </div>
+
+            <!-------- Box Two -------->
+            <div id="boxTwo" class="group-box-container">
+              <!-- Container "header" section -->
+              <div class="group-box-header" id="group-box-header__boxTwo"></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxTwoIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxTwoEntryType"></div>
+            </div>
+
+            <!-------- Box Three -------->
+            <div id="boxThree" class="group-box-container">
+              <!-- Container "header" section -->
+              <div
+                class="group-box-header"
+                id="group-box-header__boxThree"
+              ></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxThreeIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxThreeEntryType"></div>
+            </div>
+
+            <!-------- Box Four -------->
+            <div id="boxFour" class="group-box-container">
+              <!-- Container "header" section -->
+              <div
+                class="group-box-header"
+                id="group-box-header__boxFour"
+              ></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxFourIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxFourEntryType"></div>
+            </div>
+
+            <!-------- Box Five -------->
+            <div id="boxFive" class="group-box-container">
+              <!-- Container "header" section -->
+              <div
+                class="group-box-header"
+                id="group-box-header__boxFive"
+              ></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxFiveIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxFiveEntryType"></div>
+            </div>
+
+            <!-------- Box Six -------->
+            <div id="boxSix" class="group-box-container">
+              <!-- Container "header" section -->
+              <div class="group-box-header" id="group-box-header__boxSix"></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxSixIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxSixEntryType"></div>
+            </div>
+
+            <!-------- Box Seven -------->
+            <div id="boxSeven" class="group-box-container">
+              <!-- Container "header" section -->
+              <div
+                class="group-box-header"
+                id="group-box-header__boxSeven"
+              ></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxSevenIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxSevenEntryType"></div>
+            </div>
+
+            <!-------- Box Eight -------->
+            <div id="boxEight" class="group-box-container">
+              <!-- Container "header" section -->
+              <div
+                class="group-box-header"
+                id="group-box-header__boxEight"
+              ></div>
+
+              <!-- profile icons -->
+              <div class="group-box-icons" id="boxEightIcons"></div>
+
+              <!-- Entry Type (Hidden) -->
+              <div class="entry-type__container" id="boxEightEntryType"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- page footer -->
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="fixed-bottom copyright">
+            <span
+              >Copyright &copy; 2021 Ekkobar Inc. - All Rights Reserved.</span
+            >
+          </nav>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
