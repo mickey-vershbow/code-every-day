@@ -243,3 +243,24 @@ const merge2 = (nums1, m, nums2, n) => {
 };
 
 console.log(merge2([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
+
+/////////////////////
+// Palindrome Number
+/////////////////////
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function (x) {
+  let str = String(x);
+  let splitStr = str.split("");
+  let reversed = [];
+
+  for (let i = splitStr.length - 1; i >= 0; i--) {
+    reversed.push(splitStr[i]);
+  }
+  return splitStr.join("") === reversed.join("") ? true : false;
+};
+
+console.log(isPalindrome(-121));

@@ -24,6 +24,7 @@
     "jest": "^27.2.4"
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "prompt-sync": "^4.2.0"
   }
 }
