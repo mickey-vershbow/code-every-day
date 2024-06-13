@@ -1,24 +1,46 @@
-// Array example
-let arr = ["!", "cake", "that", "me", "give"];
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
 
-/////////////////////////
-// Two-Pointer Solution
-/////////////////////////
+// nums1 has a length of [m+n], the first [m] elements should be merged, the last [n] elements should be ignored
+let nums1 = [1, 2, 3, 0, 0, 0];
+// nums2 has a length of [n]
+let nums2 = [2, 5, 6];
+let m = 3;
+let n = 3;
 
-// set pointer #1 that will keep track of the first index in array
-let counter = 0;
+const merge = () => {
+  // Set first pointer to m index at nums1
+  let first = m - 1;
+  // Set second pointer to n index at nums2
+  let second = n - 1;
+  // Set i pointer to last index of nums1
+  let i = nums1.length - 1;
 
-// Loop backwards through the array, setting [i] as 2nd pointer to keep track of last index in array, iterating the counter on each iteration through the loop
-for (let i = arr.length - 1; i >= counter; i--) {
-  // store the last item in the array in a temp var
-  let tempVar = arr[i];
-  // set the last index in array to the first index in array
-  arr[i] = arr[counter];
-  // Set the first item in array to the last item that we stashed in variable
-  arr[counter] = tempVar;
+  // Set while loop to compare values at each pointer, swapping in larger values
+  while (second >= 0) {
+    // Stash first pointer value in variable
+    let fVal = nums1[first];
+    let sVal = nums2[second];
+    let iVal = nums1[i];
 
-  // ITERATE counter, not [i] var
-  counter++;
-}
+    // Compare values and decrement pointers
+    if (sVal > fVal) {
+      nums1[i] = sVal;
+      i--;
+      second--;
+    } else {
+      nums1[i] = fVal;
+      i--;
+      first--;
+    }
+  }
 
-console.log(arr);
+  console.log("nums1: ", nums1);
+};
+
+merge();
